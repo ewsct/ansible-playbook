@@ -1,0 +1,5 @@
+---
+- name: "Install vim-go pathogen plugin"
+  git:
+    repo: "https://github.com/fatih/vim-go.git"
+    dest: "~/.vim/bundle/vim-go"

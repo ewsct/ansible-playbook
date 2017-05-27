@@ -1,0 +1,34 @@
+---
+- name: "Check if Nerd-fonts exists"
+  file:
+    path: "{{ nerdfonts.archive_dir }}/nerd-fonts-master.zip"
+    state: file
+  register: nerdfonts_archive
+  ignore_errors: True
+
+
+- name: "Download Nerd-fonts"
+  get_url:
+    url: "https://github.com/ryanoasis/nerd-fonts/archive/master.zip"
+    dest: "{{ nerdfonts.archive_dir }}"
+  when: "{{ nerdfonts_archive.state != 'file' }}"
+
+
+- name: "Unarchive Nerd-fonts"
+  unarchive:
+    remote_src: True
+    src: "{{ nerdfonts.archive_dir }}/nerd-fonts-master.zip"
+    dest: "{{ nerdfonts.archive_dir }}"
+
+
+- name: "Install Nerd-fonts"
+  command:
+    "./install.sh"
+  args:
+    chdir: "{{ nerdfonts.archive_dir }}/nerd-fonts-master/"
+  ignore_errors: True
+
+
+- name: "Clean fonts cache"
+  command:
+    "fc-cache -f -v"

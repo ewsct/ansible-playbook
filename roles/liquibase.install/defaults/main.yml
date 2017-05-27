@@ -1,0 +1,10 @@
+---
+liquibase_dir: "/opt/liquibase"
+liquibase_download_url: "https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.5.3/liquibase-3.5.3-bin.zip"
+liquibase_download_dir: "/tmp"
+liquibase_download_file: "liquibase.zip"
+
+additional_drivers:
+  - url: "http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.40.zip"
+    name: "mysql.zip"
+    driver_filename: "mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar"

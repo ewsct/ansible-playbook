@@ -1,0 +1,5 @@
+---
+- name: "Install icons"
+  git:
+    repo: "https://github.com/ryanoasis/vim-devicons"
+    dest: "~/.vim/bundle/vim-devicons"

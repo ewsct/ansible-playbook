@@ -1,0 +1,20 @@
+---
+# packages to install
+packages:
+  deb:
+    - gcc-multilib
+    - libpcap0.8
+    - libssl1.0.0:i386
+
+# usefull binary files
+bin_files:
+  owner: "root"
+  group: "root"
+  dir: "/usr/local/bin"
+  mode: "0555"
+  binaries:
+    - "bin/wrapper-linux"
+
+images:
+  directory: "iou"
+  mode: "0755"

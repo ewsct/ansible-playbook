@@ -1,0 +1,27 @@
+---
+- name: "Accept Oracle license"
+  shell: "echo debconf shared/accepted-oracle-license-v1-1 select true | \
+    sudo debconf-set-selections"
+  changed_when: False
+  become: True
+        
+
+- name: "Add PPA for Oracle java"
+  apt_repository:
+    repo: "{{ oracle_java_repo }}"
+  become: True
+
+
+- name: "Install Oracle java"
+  apt: 
+    name: "oracle-java{{ oracle_java_version }}-installer"
+    state: "latest"
+    update_cache: True
+  become: True
+
+
+- name: "Set Java version as default"
+  apt:
+    name: "oracle-java{{ oracle_java_version }}-set-default"
+    state: latest
+  become: True

@@ -1,0 +1,7 @@
+---
+- name: "Add rpm repo (CentOS)"
+  copy:
+    src: docker.repo
+    dest: /etc/yum.repos.d/
+    mode: 0644
+  become: yes

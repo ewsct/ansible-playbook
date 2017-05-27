@@ -1,0 +1,7 @@
+---
+- name: "Install powerline"
+  apt:
+    state: present
+    name: powerline
+  become: True
+

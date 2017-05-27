@@ -1,0 +1,59 @@
+{%- if pathogen|bool %}
+" Pathogen
+execute pathogen#infect()
+call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
+{% endif %}
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set number
+set mouse=a
+set laststatus=2
+set t_Co=256
+set term=xterm-256color
+set termencoding=utf-8
+set encoding=utf-8
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:10 
+set fillchars=""
+set ruler                     " show the line number on the bar
+set more                      " use more prompt
+set autoread                  " watch for file changes
+set noswapfile
+set ai                        " auto intend
+set ignorecase                " ignore case while searching text
+set nocompatible              " disable Vi command
+set wildmenu                  " set auto 
+set pastetoggle=
+
+syntax on 
+colorscheme {{ theme }}
+
+{% if nerdtree|bool -%}
+map \\ :NERDTreeToggle<CR>
+{% endif %}
+map mc :!mc -b<CR>
+map cm :s/\(^.*$\)/#\1/<CR>
+map <F5> :!% <CR>
+map <F4> :sh <CR>
+map <C-c> :w !pbcopy<CR>
+map <tab><tab> <C-w>w
+
+{% if nerdtree|bool -%}
+let NERDTreeShowBookmarks=1
+let g:NERDTreeShowHidden=0
+let g:NERDTreeWinSize = 40
+{% endif %}
+
+{% if powerline|bool -%}
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
+{% endif %}
+
+{% if icons|bool -%}
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+{% endif %}
+

@@ -1,0 +1,53 @@
+---
+- name: "remove old liquibase distribution"
+  file:
+    path: "{{ liquibase_dir }}"
+    state: absent
+  become: True
+
+
+- name: "Create liquibase directory"
+  file:
+    path: "{{ liquibase_dir }}"
+    mode: 0755
+    state: directory
+  become: True
+
+
+- name: "Download liquibase package"
+  get_url:
+    url: "{{ liquibase_download_url }}"
+    dest: "{{ liquibase_download_dir }}/{{ liquibase_download_file }}"
+    force: True
+
+
+# TODO: replace it with unarchive module as 2.2 version is available
+- name: "Unarchive liquibase package"
+  command: "unzip \
+    {{ liquibase_download_dir }}/{{ liquibase_download_file }} \
+    -d {{ liquibase_dir}}"
+  become: True
+
+
+- name: "Add liquibase dir to $PATH"
+  lineinfile:
+    dest: "~/.bashrc"
+    line: "PATH=$PATH:{{ liquibase_dir }}"
+
+
+- name: "Download additional drivers"
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ liquibase_download_dir }}/{{ item.name }}"
+    force: True
+  with_items: "{{ additional_drivers }}"
+
+
+- name: "Unarchive additional drivers"
+  command: "unzip -j \
+    {{ liquibase_download_dir }}/{{ item.name }} \
+    {{ item.driver_filename }} \
+    -d {{ liquibase_dir}}/lib/"
+  become: True
+  with_items: "{{ additional_drivers }}"
+  

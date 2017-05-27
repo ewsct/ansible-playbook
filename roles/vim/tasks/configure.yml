@@ -1,0 +1,39 @@
+---
+- name: "Remove old .vim directory"
+  file:
+    dest: "~/.vim"
+    state: absent
+    force: yes
+ 
+
+- name: "Create .vim directory"
+  file:
+    dest: "~/.vim"
+    state: directory
+    mode: 0755
+    force: yes
+ 
+
+- name: "Create .vimrc file"
+  template:
+    src: "vimrc.j2"
+    dest: "~/.vimrc"
+    mode: 0644
+    force: yes
+
+
+- name: "Create .vim directories structure"
+  file:
+    dest: "~/.vim/{{ item }}"
+    state: directory
+    mode: 0755
+    force: yes
+  with_items: "{{ vim_directories }}"
+ 
+
+- name: "Install pathogen plugin"
+  get_url:
+    url: "https://tpo.pe/pathogen.vim"
+    dest: "~/.vim/autoload/pathogen.vim"
+    mode: 0644
+    force: yes

@@ -1,0 +1,29 @@
+---
+install: yes
+configure: yes
+icons: yes
+nerdtree: yes
+powerline: yes
+pathogen: yes
+install_themes: yes
+golang: yes
+theme: "seti"
+
+tmp_dir: "/tmp"
+
+themes:
+  - name: "mirodark"
+    file: "colors/mirodark.vim"
+    url: "https://github.com/djjcast/mirodark"
+  - name: "seti"
+    file: "colors/seti.vim"
+    url: "https://github.com/trusktr/seti.vim"
+
+vim_directories:
+  - "colors"
+  - "autoload"
+  - "bundle"
+  - "ftdetect"
+  - "ftplugin"
+  - "indent"
+  - "syntax"

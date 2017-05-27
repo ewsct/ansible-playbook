@@ -1,0 +1,14 @@
+---
+- name: "Install NERDTree"
+  git:
+    repo: "https://github.com/scrooloose/nerdtree.git"
+    dest: "~/.vim/bundle/nerdtree"
+
+
+- name: "Create NERDTree bookmarks file"
+  template:
+    src: "NERDTreeBookmarks.j2"
+    dest: "~/.NERDTreeBookmarks"
+    mode: 0644
+    force: yes
+

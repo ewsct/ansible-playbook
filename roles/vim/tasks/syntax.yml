@@ -1,0 +1,50 @@
+- name: "Install syntax highlightning for toml files"
+  git:
+    repo: "https://github.com/cespare/vim-toml"
+    dest: "~/.vim/bundle/toml"
+
+
+- name: "Get syntax highlighting for dystemd files"
+  git:
+    repo: "https://github.com/kurayama/systemd-vim-syntax"
+    dest: "{{ tmp_dir }}/systemd-vim-syntax"
+
+
+- name: "Install syntax highlightning for dystemd files"
+  copy:
+    remote_src: yes
+    src: "{{ tmp_dir }}/systemd-vim-syntax/syntax/systemd.vim"
+    dest: "~/.vim/syntax/systemd.vim"
+
+
+- name: "Install syntax detecting for dystemd files"
+  copy:
+    remote_src: yes
+    src: "{{ tmp_dir }}/systemd-vim-syntax/ftdetect/systemd.vim"
+    dest: "~/.vim/ftdetect/systemd.vim"
+
+
+- name: "Download Ansible syntax"
+  git:
+    repo: "https://github.com/pearofducks/ansible-vim"
+    dest: "{{ tmp_dir }}/ansible-vim"
+     
+
+# Ansible does not support recursive copy of remote directory
+- name: "Install Ansible syntax"
+  shell:
+    "cp -r {{ tmp_dir }}/ansible-vim/{{ item }}/* ~/.vim/{{ item }}/"
+  with_items:
+    - "ftdetect"
+    - "ftplugin"
+    - "indent"
+    - "syntax"
+
+
+- name: "Clean systemd highligh temporary directory"
+  file:
+    path: "{{ tmp_dir }}/{{ item }}"
+    state: absent
+  with_items:
+    - "systemd-vim-syntax"
+    - "ansible-vim" 

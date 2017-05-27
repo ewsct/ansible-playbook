@@ -1,0 +1,35 @@
+---
+- name: "Install Vim (deb)"
+  apt:
+    name: "vim-gnome-py2"
+    state: present
+    update_cache: yes
+  become: yes
+  when: "{{ ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' }}"
+
+
+- name: "Configure alternatives"
+  alternatives:
+    name: "vim"
+    path: "/usr/bin/vim.gnome-py2" 
+  become: yes
+  when: "{{ ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' }}"
+
+
+- name: "Install Vim (yum)"
+  yum:
+    name: vim
+    state: present
+    update_cache: yes
+  become: yes
+  when: "{{ ansible_distribution == 'CentOS' }}"
+
+
+# package python-dnf should be installed
+- name: "Install Vim (dnf)"
+  dnf:
+    name: "vim"
+    state: present
+  become: yes
+  when: "{{ ansible_distribution == 'Fedora' }}"
+

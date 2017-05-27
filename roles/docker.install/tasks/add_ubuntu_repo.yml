@@ -1,0 +1,14 @@
+---
+- name: "Add apt key (Ubuntu)"
+  apt_key:
+    keyserver: "p80.pool.sks-keyservers.net"
+    id: "58118E89F3A912897C070ADBF76221572C52609D"
+  become: yes
+
+
+- name: "Add apt repo (Ubuntu)"
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ubuntu_release }} main"
+    state: present
+  become: yes
+

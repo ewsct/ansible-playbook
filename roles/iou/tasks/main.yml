@@ -1,2 +1,10 @@
 ---
-- include: "install.yml"
+- name: "Include iou images vars"
+  include_vars: images.yml
+  when: "not images is defined"
+
+- include: "build.yml"
+  when: "build|bool"
+
+- include: "run.yml"
+  when: "run|bool"

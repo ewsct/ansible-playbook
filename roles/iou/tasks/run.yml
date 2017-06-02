@@ -1,0 +1,17 @@
+---
+- name: "Count exposed ports"
+  set_fact:
+    exposed_ports: "{{ exposed_ports|default([docker.ssh_port_binding]) + [ item.console_to_telnet_port|string + ':' + item.console_to_telnet_port|string ]}}"
+  with_items: "{{ instances }}"
+
+
+- name: "Run iou container"
+  docker_container:
+    name: "{{ docker.container }}"
+    image: "{{ docker.image.name }}:{{ docker.image.tag }}"
+    detach: True
+    cleanup: True
+    recreate: True
+    volumes:
+      - "{{ workdir.name }}:{{ docker.workdir }}"
+    ports: "{{ exposed_ports }}"

@@ -1,0 +1,22 @@
+sshd.service: {
+  command: "/usr/sbin/sshd -D",
+}
+
+license.service: {
+  type: oneshot,
+  command: "/usr/bin/license_gen.py",
+  uid: 1000,
+  gid: 1000,
+}
+
+network.service: {
+  after: license.service,
+  command: "{{ docker.workdir }}/run_network",
+  uid: 1000,
+  gid: 1000,
+}
+
+console.logging: {
+  stdout: true,
+  stderr: true,
+}

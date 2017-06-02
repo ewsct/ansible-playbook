@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export NETIO_NETMAP={{ docker.workdir }}/NETMAP
+
+{% for item in instances %}
+wrapper-linux -m {{ docker.workdir }}/{{ item.image }} -p {{ item.console_to_telnet_port }} -- -e {{ item.ethernet_boards }}{% if item.serial_boards != 0 %} -s {{ item.serial_boards }} {% endif %} {% if item.config is defined %}-c {{ item.config }}{% endif %} {{ item.number }} &
+sleep 3
+{% endfor %}

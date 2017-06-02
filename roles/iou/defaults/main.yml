@@ -1,0 +1,40 @@
+---
+build: True
+run: True
+debug: True
+
+topology_name: "base"
+
+workdir:
+  name: "{{ ansible_env.HOME }}/iou/{{ topology_name }}"
+  mode: "0755"
+
+
+container_files:
+  - "license_gen.py"
+  - "wrapper-linux"
+
+
+docker:
+  ssh_port_binding: "2222:22"
+  workdir: "/iou"
+  image:
+    name: "iou"
+    tag: "{{ topology_name }}"
+  container: "iou_{{ topology_name }}"
+  user:
+    name: "cisco"
+    pass: "cisco"
+
+
+instances:
+  - number: 1
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2001
+    ethernet_boards: 1
+    serial_boards: 1
+  - number: 2
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2002
+    ethernet_boards: 1
+    serial_boards: 1

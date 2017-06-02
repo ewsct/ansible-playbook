@@ -1,0 +1,28 @@
+FROM ubuntu:16.04
+
+COPY license_gen.py /usr/bin/
+COPY wrapper-linux /usr/bin/
+COPY chaperone.conf /etc/chaperone.d/chaperone.conf
+
+ENV USER {{ docker.user.name }}
+ENV PASS {{ docker.user.pass }}
+
+RUN dpkg --add-architecture i386 && apt-get update && apt-get upgrade -y && \
+    apt-get install -y gcc-multilib libpcap0.8 libssl1.0.0 libssl1.0.0:i386 \
+      python python3-pip openssh-server net-tools vim htop sudo iputils-ping && \
+    mkdir -p /var/run/sshd && chmod 0755 /var/run/sshd && \
+    useradd -G sudo $USER && echo "$USER:$PASS" | chpasswd && \
+      mkdir /home/$USER && chown $USER:$USER /home/$USER && \
+      sed -i "s/\($USER.*\)/\1\/bin\/bash/" /etc/passwd && \
+      echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    pip3 install chaperone && \
+    mkdir {{ docker.workdir }} && ln -s /lib/i386-linux-gnu/libssl.so.1.0.0 /lib/libcrypto.so.4 && \
+     chmod +x /usr/bin/license_gen.py
+
+WORKDIR {{ docker.workdir }}
+
+VOLUME ["{{ docker.workdir }}"]
+
+EXPOSE 22 2000-2100
+
+ENTRYPOINT ["/usr/local/bin/chaperone"]

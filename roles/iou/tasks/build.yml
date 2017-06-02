@@ -1,0 +1,83 @@
+---
+- name: "Create working directory"
+  file:
+    path: "{{ workdir.name }}"
+    mode: "{{ workdir.mode }}"
+    state: directory
+
+
+- name: "Copy files"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ workdir.name }}/"
+    mode: "0755"
+  with_items: "{{ container_files }}"
+
+
+- name: "Generate dockerfile"
+  template:
+    src: "Dockerfile.j2"
+    dest: "{{ workdir.name }}/Dockerfile"
+
+
+- name: "Generate run script"
+  template:
+    src: "run_network.j2"
+    dest: "{{ workdir.name }}/run_network"
+    mode: "0755"
+
+
+- name: "Copy NETMAP"
+  copy:
+    src: "NETMAP"
+    dest: "{{ workdir.name }}/NETMAP"
+
+
+- name: "Generate chaperone config"
+  template:
+    src: "chaperone.conf.j2"
+    dest: "{{ workdir.name }}/chaperone.conf"
+
+
+- name: "Copy iou images"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ workdir.name }}/"
+    mode: "0755"
+  with_items:
+    - "{{ images.l2 }}"
+    - "{{ images.l3 }}"
+  when: "images is defined"
+
+# TODO: before that run pip install docker-py
+- name: "Remove old docker image"
+  docker_image:
+    state: absent
+    name: "{{ docker.image.name }}"
+    force: True
+    tag: "{{ docker.image.tag }}"
+
+
+- name: "Build docker image"
+  docker_image:
+     path: "{{ workdir.name }}"
+     name: "{{ docker.image.name }}"
+     tag: "{{ docker.image.tag }}"
+
+
+- name: "Remove container files"
+  file:
+    path: "{{ workdir.name }}/{{ item }}"
+    state: absent
+  when: "not debug|bool"
+  with_items:
+    - "Dockerfile"
+    - "chaperone.conf"
+
+
+- name: "Clean up"
+  file:
+    path: "{{ workdir.name }}/{{ item }}"
+    state: absent
+  with_items: "container_files"
+  when: "not debug|bool"

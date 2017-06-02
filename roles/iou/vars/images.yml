@@ -1,0 +1,15 @@
+---
+# This file contains variables that define iou images for L2 and L3 devices.
+# There should be a dictionary called `images`, that containe two keys `l2` and `l3`.
+# Values should ba a path to image file or it can be only its name 
+# if the file is located in `files` directory of current role.
+# 
+# Example:
+#
+# images:
+#  l2: "iou_l2_image"
+#  l3: "iou_l3_image"
+#
+images:
+  l2: "i86bi-linux-l2-adventerprisek9-15.1a.bin"
+  l3: "i86bi-linux-l3-adventerprisek9-15.2.4M1.bin"

@@ -1,0 +1,3 @@
+---
+dependencies:
+   - { role: "iou", topology_name: "routing_lab"}

@@ -1,0 +1,42 @@
+---
+instances:
+  - number: 1
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2001
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 2
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2002
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 3
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2003
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 4
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2004
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 5
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2005
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 6
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2006
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 11
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2011
+    ethernet_boards: 1
+    serial_boards: 0
+  - number: 12
+    image: "{{ images.l3 }}"
+    console_to_telnet_port: 2012
+    ethernet_boards: 1
+    serial_boards: 0

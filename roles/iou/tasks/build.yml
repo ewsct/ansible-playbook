@@ -31,6 +31,14 @@
   copy:
     src: "NETMAP"
     dest: "{{ workdir.name }}/NETMAP"
+ 
+
+- name: "Copy configs"
+  copy:
+    src: "{{ item.config }}"
+    dest: "{{ workdir.name }}/{{ item.config }}"
+  when: "item.config is defined"
+  with_items: "{{ instances }}"
 
 
 - name: "Generate chaperone config"

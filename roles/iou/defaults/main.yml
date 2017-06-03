@@ -1,7 +1,7 @@
 ---
 build: True
 run: True
-debug: True
+debug: False
 
 topology_name: "base"
 

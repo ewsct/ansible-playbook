@@ -2,16 +2,19 @@
 instances:
   - number: 1
     image: "{{ images.l3 }}"
+    config: "nvram_00001"
     console_to_telnet_port: 2001
     ethernet_boards: 1
     serial_boards: 0
   - number: 2
     image: "{{ images.l3 }}"
+    config: "nvram_00002"
     console_to_telnet_port: 2002
     ethernet_boards: 1
     serial_boards: 0
   - number: 3
     image: "{{ images.l3 }}"
+    config: "nvram_00003"
     console_to_telnet_port: 2003
     ethernet_boards: 1
     serial_boards: 0

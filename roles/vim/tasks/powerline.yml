@@ -1,7 +1,16 @@
 ---
-- name: "Install powerline"
+- name: "Install powerline (deb)"
   apt:
     state: present
     name: powerline
   become: True
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+
+- name: "Install powerline (dnf)"
+  dnf:
+    state: present
+    name: powerline
+  become: True
+  when: ansible_distribution == 'Fedora'
 

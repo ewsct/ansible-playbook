@@ -10,7 +10,7 @@
 - name: "Install powerline (dnf)"
   dnf:
     state: present
-    name: powerline
+    name: vim-powerline
   become: True
   when: ansible_distribution == 'Fedora'
 

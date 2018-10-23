@@ -1,7 +1,7 @@
 ---
 - name: "Install Vim (deb)"
   apt:
-    name: "vim-gnome-py2"
+    name: "vim-gnome"
     state: present
     update_cache: yes
   become: yes
@@ -11,7 +11,7 @@
 - name: "Configure alternatives"
   alternatives:
     name: "vim"
-    path: "/usr/bin/vim.gnome-py2" 
+    path: "/usr/bin/vim.gtk3"
   become: yes
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 

@@ -11,7 +11,7 @@
   get_url:
     url: "https://github.com/ryanoasis/nerd-fonts/archive/master.zip"
     dest: "{{ nerdfonts.archive_dir }}"
-  when: "{{ nerdfonts_archive.state != 'file' }}"
+  when: nerdfonts_archive.state != 'file'
 
 
 - name: "Unarchive Nerd-fonts"

@@ -12,14 +12,14 @@
     src: "/tmp/{{ item.name }}/{{ item.file }}"
     dest: "~/.vim/colors/{{ item.name }}.vim"
   with_items: "{{ themes }}"
-  when: "{{ ansible_version.major >= 2 }}"
+  when: ansible_version.major >= 2 
 
 
 - name: "Install themes (ansible version < 2)"
   command:
     "cp /tmp/{{ item.name }}/{{ item.file }} ~/.vim/colors/{{ item.name }}.vim"
   with_items: "{{ themes }}"
-  when: "{{ ansible_version.major < 2 }}"
+  when: ansible_version.major < 2
 
 
 - name: "Clean up downloaded themes"

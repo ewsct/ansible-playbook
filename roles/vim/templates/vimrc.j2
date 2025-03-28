@@ -47,9 +47,9 @@ let g:NERDTreeWinSize = 40
 
 {% if powerline|bool -%}
 {% if not ansible_distribution == 'Fedora' -%}
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 {% endif %}
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1

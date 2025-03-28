@@ -3,8 +3,8 @@
   include_vars: images.yml
   when: "not images is defined"
 
-- include: "build.yml"
+- include_tasks: "build.yml"
   when: "build|bool"
 
-- include: "run.yml"
+- include_tasks: "run.yml"
   when: "run|bool"

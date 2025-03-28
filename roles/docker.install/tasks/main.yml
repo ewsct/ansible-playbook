@@ -1,8 +1,8 @@
 ---
-- include: add_ubuntu_repo.yml
+- include_tasks: add_ubuntu_repo.yml
   when: ansible_distribution == 'Ubuntu'
 
-- include: add_rpm_repo.yml
+- include_tasks: add_rpm_repo.yml
   when: ansible_distribution == "CentOS"
 
-- include: install_docker.yml
+- include_tasks: install_docker.yml

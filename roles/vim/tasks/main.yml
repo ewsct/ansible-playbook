@@ -1,23 +1,23 @@
 ---
-- include: install.yml
+- include_tasks: install.yml
   when: install|bool
 
-- include: configure.yml
+- include_tasks: configure.yml
   when: configure|bool
 
-- include: nerdtree.yml
+- include_tasks: nerdtree.yml
   when: nerdtree|bool
 
-- include: themes.yml
+- include_tasks: themes.yml
   when: install_themes|bool
 
-- include: icons.yml
+- include_tasks: icons.yml
   when: icons|bool
 
-- include: powerline.yml
+- include_tasks: powerline.yml
   when: powerline|bool
 
-- include: syntax.yml
+- include_tasks: syntax.yml
 
-- include: support_golang.yml
+- include_tasks: support_golang.yml
   when: golang|bool

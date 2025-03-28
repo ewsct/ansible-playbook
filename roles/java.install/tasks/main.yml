@@ -1,2 +1,2 @@
 ---
-- include: install_oracle_java.yml
+- include_tasks: install_oracle_java.yml

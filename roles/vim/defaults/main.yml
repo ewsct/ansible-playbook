@@ -1,12 +1,12 @@
 ---
-install: yes
+install: no
 configure: yes
 icons: yes
 nerdtree: yes
 powerline: yes
 pathogen: yes
 install_themes: yes
-golang: yes
+golang: no
 theme: "seti"
 
 tmp_dir: "/tmp"
